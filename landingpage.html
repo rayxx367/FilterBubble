@@ -19,7 +19,7 @@
 
 		    FB.getLoginStatus(function(response) {
 		    	if (response.status === 'connected') {
-		    		FB.api('/me', function(response) {
+		    		FB.api('/me?fields=likes', function(response) {
 			  			console.log(response);
 			  			document.getElementById('status').innerHTML = 'We are connected. Your name is ' + response.name +  ' Your Likes are '  +  response.likes ;
 
