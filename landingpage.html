@@ -21,7 +21,7 @@
 		    	if (response.status === 'connected') {
 		    		FB.api('/me', function(response) {
 			  			console.log(response);
-			  			document.getElementById('status').innerHTML = ' We are connected. Your name is ' + response.name +  ' Your Birthday is '  +  response.birthday +  ' Your Gender is '  +  response.gender +  ' Your Likes are '  +  response.likes.posts;
+			  			document.getElementById('status').innerHTML = 'We are connected. Your name is ' + response.name +  ' Your Likes are '  +  response.likes ;
 
 		    			document.getElementById('login').style.visibility = 'hidden';
 		  			});
