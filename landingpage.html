@@ -17,9 +17,10 @@
 		      version    : 'v2.9'
 		    });
 
-		    FB.getLoginStatus(function(response) {
+		    FB.getLoginStatus(function(response) { 	
 		    	if (response.status === 'connected') {
-		    		FB.api('/me', function(response) {
+		    		tempobj = {}
+		    		FB.api('/me?fields=birthday', function(response) {
 			  			console.log(response);
 			  			document.getElementById('status').innerHTML = ' We are connected. Your name is ' + response.name +  ' Your Birthday is '  +  response.birthday +  ' Your Gender is '  +  response.gender +  ' Your Likes are '  +  response.likes.posts + 'Object : ' + Object.keys(response);
 
