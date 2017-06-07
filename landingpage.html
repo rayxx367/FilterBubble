@@ -19,9 +19,9 @@
 
 		    FB.getLoginStatus(function(response) {
 		    	if (response.status === 'connected') {
-		    		FB.api('/name', function(response) {
+		    		FB.api('/', function(response) {
 			  			console.log(response);
-			  			document.getElementById('status').innerHTML = 'We are connected. Your name is ' + response.name +  ' Your Likes are '  +  response.likes.data ;
+			  			document.getElementById('status').innerHTML = 'We are connected. Your name is ' + response.name +  ' Your Likes are '  +  response.birthday ;
 
 		    			document.getElementById('login').style.visibility = 'hidden';
 		  			});
