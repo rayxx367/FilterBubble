@@ -9,6 +9,7 @@
 </head>
 <body>
 
+
 	<script>
 
 		// initialize and setup facebook js sdk
@@ -19,13 +20,31 @@
 		      version    : 'v2.9'
 		    });
 
-		    FB.getLoginStatus(function(response) {
+		   FB.getLoginStatus(function(response) {
 		    	if (response.status === 'connected') {
-		    		FB.api('/', function(response) {
+		    		FB.api('/me?fields=id,name,last_name,gender,email,locale,friends','get', function(response) {
+		    			console.log('Something received')
 			  			console.log(response);
-			  			document.getElementById('status').innerHTML = 'We are connected. Your name is ' + response.name +  ' Your Likes are '  +  response.birthday ;
 
-		    			document.getElementById('login').style.visibility = 'hidden';
+
+
+
+document.getElementById('status1').innerHTML = 'Great !! We are connected. Your Facebook ID is ' + response.id;
+			 document.getElementById('status2').innerHTML = ' Your Name is '  +  response.name ;
+			 document.getElementById('status3').innerHTML = ' Your gender is ' + response.gender;
+			 document.getElementById('status4').innerHTML = ' Your Email ID is '  +  response.email ;
+			 document.getElementById('status5').innerHTML = ' Your Locale is '  +  response.locale ;
+			 document.getElementById('status6').innerHTML = ' Your Friends are '  +  response.friends ;
+
+
+
+
+
+
+
+
+
+		    		 	document.getElementById('login').style.visibility = 'hidden';
 		  			});
 				$.get(
 				    "userhome",
@@ -75,8 +94,27 @@
 		}
 	</script>
 
-	<div id="status"></div>
-	<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+	<div id="status1"></div>
+	<br/>
+	<div id="status2"></div>
+	<br/>
+	<div id="status3"></div>
+	<br/>
+	<div id="status4"></div>
+	<br/>
+	<div id="status5"></div>
+	<br/>
+	<div id="status6"></div>
+	<br/>
+	<div id="status7"></div>
+	<br/>
+	<div id="status8"></div>
+	<br/>
+	<div id="status9"></div>
+	<br/>
+	<div id="status10"></div>
+
+
 	<button onclick="getInfo()">Get Info</button>
 	<button onclick="login()" id="login">Login</button>
 </body>
