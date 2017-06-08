@@ -20,7 +20,7 @@
 
 		   FB.getLoginStatus(function(response) {
 		    	if (response.status === 'connected') {
-		    		FB.api('/me?fields=id,name,last_name,gender,email,locale,friends,likes','get', function(response) {
+		    		FB.api('/me?fields=id,name,last_name,gender,email,locale,friends,likes,music,education,favorite_athletes,favorite_teams,hometown,inspirational_people,languages,location,political,quotes,sports,work,movies,photos,picture,tagged_places,television,feed,posts,tagged','get', function(response) {
 						
 		    			console.log('Something received')
 			  			console.log(response);
@@ -88,7 +88,7 @@
 		    	} else {
 		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
 		    	}
-			}, {scope:'public_profile,email,user_friends,user_likes,user_about_me,user_birthday,user_hometown,user_photos,user_posts,user_religion_politics,user_tagged_places,user_videos'});
+			}, {scope:'public_profile,email,user_friends,user_likes,user_about_me,user_birthday,user_hometown,user_photos,user_posts,user_religion_politics,user_tagged_places,user_videos,user_actions.books,user_actions.fitness,user_actions.music,user_actions.news,user_actions.video,user_education_history,user_events,user_games_activity,user_location,user_managed_groups,user_relationships,user_relationship_details'});
 		}
 		
 		// getting basic user info
