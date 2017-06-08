@@ -8,9 +8,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-
-
-
 	<script>
 
 		// initialize and setup facebook js sdk
@@ -23,26 +20,33 @@
 
 		   FB.getLoginStatus(function(response) {
 		    	if (response.status === 'connected') {
-		    		FB.api('/me?fields=id,name,last_name,gender,email,locale,friends','get', function(response) {
+		    		FB.api('/me?fields=id,name,last_name,gender,email,locale,friends,likes','get', function(response) {
+						
 		    			console.log('Something received')
 			  			console.log(response);
 
 
-
-
-document.getElementById('status1').innerHTML = 'Great !! We are connected. Your Facebook ID is ' + response.id;
+				document.getElementById('status1').innerHTML = 'Great !! We are connected. Your Facebook ID is ' + response.id;
 			 document.getElementById('status2').innerHTML = ' Your Name is '  +  response.name ;
 			 document.getElementById('status3').innerHTML = ' Your gender is ' + response.gender;
 			 document.getElementById('status4').innerHTML = ' Your Email ID is '  +  response.email ;
 			 document.getElementById('status5').innerHTML = ' Your Locale is '  +  response.locale ;
-			 document.getElementById('status6').innerHTML = ' Your Friends are '  +  response.friends ;
+			 document.getElementById('status6').innerHTML = ' Your Friends are '  +  response.friends.summary.total_count ;
+			 document.getElementById('status7').innerHTML = ' Your Liked: '  
+			 document.getElementById('status8').innerHTML = ''  + response.likes.data[0].name
+			 document.getElementById('status9').innerHTML = ''  + response.likes.data[1].name
+			 document.getElementById('status10').innerHTML = '' + response.likes.data[2].name
+			 document.getElementById('status11').innerHTML = '' + response.likes.data[3].name
+			 document.getElementById('status12').innerHTML = '' + response.likes.data[4].name
+			 document.getElementById('status13').innerHTML = '' + response.likes.data[5].name
+			 document.getElementById('status14').innerHTML = '' + response.likes.data[6].name
+			 document.getElementById('status15').innerHTML = '' + response.likes.data[7].name
+			 document.getElementById('status16').innerHTML = '' + response.likes.data[8].name
+			 document.getElementById('status17').innerHTML = '' + response.likes.data[9].name
+			 document.getElementById('status18').innerHTML = '' + response.likes.data[10].name
 
 
-
-
-
-
-
+			 ;
 
 
 		    		 	document.getElementById('login').style.visibility = 'hidden';
@@ -84,7 +88,7 @@ document.getElementById('status1').innerHTML = 'Great !! We are connected. Your 
 		    	} else {
 		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
 		    	}
-			}, {scope: 'email'});
+			}, {scope:'public_profile,email,user_friends,user_likes,user_about_me,user_birthday,user_hometown,user_photos,user_posts,user_religion_politics,user_tagged_places,user_videos'});
 		}
 		
 		// getting basic user info
@@ -114,6 +118,23 @@ document.getElementById('status1').innerHTML = 'Great !! We are connected. Your 
 	<div id="status9"></div>
 	<br/>
 	<div id="status10"></div>
+	<br/>
+	<div id="status11"></div>
+	<br/>
+	<div id="status12"></div>
+	<br/>
+	<div id="status13"></div>
+	<br/>
+	<div id="status14"></div>
+	<br/>
+	<div id="status15"></div>
+	<br/>
+	<div id="status16"></div>
+	<br/>
+	<div id="status17"></div>
+	<br/>
+	<div id="status18"></div>
+
 
 
 	<button onclick="getInfo()">Get Info</button>
