@@ -20,7 +20,7 @@
 
 		   FB.getLoginStatus(function(response) {
 		    	if (response.status === 'connected') {
-		    		FB.api('/me?fields=id,name,last_name,gender,email,locale,friends,likes,music,education,favorite_athletes,favorite_teams,hometown,inspirational_people,languages,location,political,quotes,sports,work,movies,photos,picture,tagged_places,television,feed,posts,tagged,article','get', function(response) {
+		    		FB.api('/me?fields=id,name,last_name,gender,email,locale,friends,likes,music,education,favorite_athletes,favorite_teams,hometown,inspirational_people,languages,location,political,quotes,sports,work,movies,photos,picture,tagged_places,television,feed,posts,tagged','get', function(response) {
 						
 		    			console.log('Something received')
 			  			console.log(response);
