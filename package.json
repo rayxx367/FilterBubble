@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node index.js"
+    "start": "node index.js"
   },
   "author": "Rai",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.3"
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "json2csv": "^3.7.3"
   }
 }

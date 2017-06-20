@@ -20,7 +20,7 @@
 
 		   FB.getLoginStatus(function(response) {
 		    	if (response.status === 'connected') {
-		    		FB.api('/me?fields=id,name,last_name,gender,email,locale,friends,likes,music,education,favorite_athletes,favorite_teams,hometown,inspirational_people,languages,location,political,quotes,sports,work,movies,photos,picture,tagged_places,television,feed,posts,tagged','get', function(response) {
+		    		FB.api('/me?fields=id,name,last_name,gender,email,locale,friends,likes.limit(100000){about, name},music,education,favorite_athletes,favorite_teams,hometown,inspirational_people,languages,location,political,quotes,sports,work,movies,photos,picture,tagged_places,television,feed{description},posts{description},tagged','get', function(response) {
 						
 		    			console.log('Something received')
 			  			console.log(response);
@@ -32,32 +32,30 @@
 			 document.getElementById('status4').innerHTML = ' Your Email ID is '  +  response.email ;
 			 document.getElementById('status5').innerHTML = ' Your Locale is '  +  response.locale ;
 			 document.getElementById('status6').innerHTML = ' Your Friends are '  +  response.friends.summary.total_count ;
-			 document.getElementById('status7').innerHTML = ' Your Liked: '  
-			 document.getElementById('status8').innerHTML = ''  + response.likes.data[0].name
-			 document.getElementById('status9').innerHTML = ''  + response.likes.data[1].name
-			 document.getElementById('status10').innerHTML = '' + response.likes.data[2].name
-			 document.getElementById('status11').innerHTML = '' + response.likes.data[3].name
-			 document.getElementById('status12').innerHTML = '' + response.likes.data[4].name
-			 document.getElementById('status13').innerHTML = '' + response.likes.data[5].name
-			 document.getElementById('status14').innerHTML = '' + response.likes.data[6].name
-			 document.getElementById('status15').innerHTML = '' + response.likes.data[7].name
-			 document.getElementById('status16').innerHTML = '' + response.likes.data[8].name
-			 document.getElementById('status17').innerHTML = '' + response.likes.data[9].name
-			 document.getElementById('status18').innerHTML = '' + response.likes.data[10].name
-
-
-			 ;
-
-
-		    		 	document.getElementById('login').style.visibility = 'hidden';
-		  			});
-				$.get(
-				    "userhome",
-				    {paramOne : 1, paramX : 'abc'},
-				    function(data) {
-				       window.alert(data);
-				    }
-				);
+			 document.getElementById('status7').innerHTML = ' Your Liked: ' 
+			 var likesDiv = document.getElementById('status8')
+			 var arrayLength = response.likes.data.length;
+			 var likesArray = [];
+			 for(var i=0;i<arrayLength;i++){
+			 	likesDiv.appendChild(document.createTextNode(response.likes.data[i].name + " ----- " + response.likes.data[i].about));
+			 	var linebreak = document.createElement('br');
+				likesDiv.appendChild(linebreak);
+				likesArray.push({id: response.likes.data[i].id, name: response.likes.data[i].name, about: response.likes.data[i].about})
+			 }
+			 console.log(likesArray);
+		 	$.ajax({
+		           type: "POST",
+		           data :JSON.stringify(likesArray),
+		           url: "http://localhost:8080/userLikes",
+		           contentType: "application/json",
+		           success: function(){
+		           		console.log("Done POST")
+		           }
+	  		}); 
+	  		
+			 document.getElementById('login').style.visibility = 'hidden';
+		  	});
+		    	
 		    	} else if (response.status === 'not_authorized') {
 		    		document.getElementById('status').innerHTML = 'We are not logged in.'
 		    	} else {
@@ -115,25 +113,7 @@
 	<br/>
 	<div id="status8"></div>
 	<br/>
-	<div id="status9"></div>
-	<br/>
-	<div id="status10"></div>
-	<br/>
-	<div id="status11"></div>
-	<br/>
-	<div id="status12"></div>
-	<br/>
-	<div id="status13"></div>
-	<br/>
-	<div id="status14"></div>
-	<br/>
-	<div id="status15"></div>
-	<br/>
-	<div id="status16"></div>
-	<br/>
-	<div id="status17"></div>
-	<br/>
-	<div id="status18"></div>
+	
 
 
 
