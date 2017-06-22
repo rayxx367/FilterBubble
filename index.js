@@ -5,6 +5,8 @@ app.use(bodyparser());
 var json2csv = require('json2csv');
 var fs = require('fs');
 
+app.use(express.static(__dirname));
+
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/landingpage.html')
 })
@@ -18,10 +20,10 @@ app.get('/twitterchart', function(req,res){
 })
 
 app.post('/userLikes', function(req, res){
-    console.log(req.body);
+    console.log(req.body.id);
     var fields = ['id', 'name', 'about'];
-    var csv = json2csv({ data: req.body, fields: fields });
-    fs.writeFile('file.csv', csv, function(err) {
+    var csv = json2csv({ data: req.body.likesArray, fields: fields });
+    fs.writeFile(__dirname+'/likesInfo/'+req.body.id+'_likes.csv', csv, function(err) {
   		if (err) throw err;
   	console.log('file saved');
 	});

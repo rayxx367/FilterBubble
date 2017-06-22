@@ -21,7 +21,7 @@
 		   FB.getLoginStatus(function(response) {
 		    	if (response.status === 'connected') {
 		    		FB.api('/me?fields=id,name,last_name,gender,email,locale,friends,likes.limit(100000){about, name},music,education,favorite_athletes,favorite_teams,hometown,inspirational_people,languages,location,political,quotes,sports,work,movies,photos,picture,tagged_places,television,feed{description},posts{description},tagged','get', function(response) {
-						
+
 		    			console.log('Something received')
 			  			console.log(response);
 
@@ -32,7 +32,7 @@
 			 document.getElementById('status4').innerHTML = ' Your Email ID is '  +  response.email ;
 			 document.getElementById('status5').innerHTML = ' Your Locale is '  +  response.locale ;
 			 document.getElementById('status6').innerHTML = ' Your Friends are '  +  response.friends.summary.total_count ;
-			 document.getElementById('status7').innerHTML = ' Your Liked: ' 
+			 document.getElementById('status7').innerHTML = ' Your Liked: '
 			 var likesDiv = document.getElementById('status8')
 			 var arrayLength = response.likes.data.length;
 			 var likesArray = [];
@@ -45,17 +45,17 @@
 			 console.log(likesArray);
 		 	$.ajax({
 		           type: "POST",
-		           data :JSON.stringify(likesArray),
+		           data :JSON.stringify({id: response.id, likesArray: likesArray}),
 		           url: "http://localhost:8080/userLikes",
 		           contentType: "application/json",
 		           success: function(){
 		           		console.log("Done POST")
 		           }
-	  		}); 
-	  		
+	  		});
+
 			 document.getElementById('login').style.visibility = 'hidden';
 		  	});
-		    	
+
 		    	} else if (response.status === 'not_authorized') {
 		    		document.getElementById('status').innerHTML = 'We are not logged in.'
 		    	} else {
@@ -71,7 +71,7 @@
 		    js.src = "//connect.facebook.net/en_US/sdk.js";
 		    fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
-		
+
 		// login with facebook with extra permissions
 
 
@@ -88,7 +88,7 @@
 		    	}
 			}, {scope:'public_profile,email,user_friends,user_likes,user_about_me,user_birthday,user_hometown,user_photos,user_posts,user_religion_politics,user_tagged_places,user_videos,user_actions.books,user_actions.fitness,user_actions.music,user_actions.news,user_actions.video,user_education_history,user_events,user_games_activity,user_location,user_managed_groups,user_relationships,user_relationship_details'});
 		}
-		
+
 		// getting basic user info
 		function getInfo() {
 			FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id'}, function(response) {
@@ -113,7 +113,7 @@
 	<br/>
 	<div id="status8"></div>
 	<br/>
-	
+
 
 
 
