@@ -5,9 +5,6 @@ app.use(bodyparser());
 var json2csv = require('json2csv');
 var fs = require('fs');
 
-var api = require('./routes/api');
-app.use('/api',api);
-
 app.use(express.static(__dirname));
 
 var mongojs = require("mongojs");
