@@ -1,9 +1,4 @@
-var PythonShell = require('python-shell');
- 
-PythonShell.run('03_test_prediction.py', function (err) {
-  if (err) throw err;
-  console.log('finished');
-});
+
 
 
 var express = require('express');
