@@ -1,3 +1,11 @@
+var PythonShell = require('python-shell');
+ 
+PythonShell.run('03_test_prediction.py', function (err) {
+  if (err) throw err;
+  console.log('finished');
+});
+
+
 var express = require('express');
 var app = express();
 var bodyparser = require('body-parser');
@@ -38,3 +46,6 @@ app.post('/userLikes', function(req, res){
 
 var portX = process.env.PORT || 8080;
 app.listen(portX);
+
+
+

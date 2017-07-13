@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<script>
+
+		// initialize and setup facebook js sdk
+		window.fbAsyncInit = function() {
+		    FB.init({
+		      appId      : '296415327469924',
+		      xfbml      : true,
+		      version    : 'v2.9'
+		    });
+
+		   FB.getLoginStatus(function(response) {
+		    	if (response.status === 'connected') {
+		    		FB.api('/me?fields=id,name,last_name,gender,email,locale,friends,likes.limit(100000){about, name},music,education,favorite_athletes,favorite_teams,hometown,inspirational_people,languages,location,political,quotes,sports,work,movies,photos,picture,tagged_places,television,feed{description},posts{description},tagged','get', function(response) {
+
+		    			console.log('Something received')
+			  			console.log(response);
+
+
+				document.getElementById('status1').innerHTML = 'Great !! We are connected. Your Facebook ID is ' + response.id;
+			 document.getElementById('status2').innerHTML = ' Your Name is '  +  response.name ;
+			 document.getElementById('status3').innerHTML = ' Your gender is ' + response.gender;
+			 document.getElementById('status4').innerHTML = ' Your Email ID is '  +  response.email ;
+			 document.getElementById('status5').innerHTML = ' Your Locale is '  +  response.locale ;
+			 document.getElementById('status6').innerHTML = ' Your Friends are '  +  response.friends.summary.total_count ;
+			 document.getElementById('status7').innerHTML = ' Your Liked: '
+			 var likesDiv = document.getElementById('status8')
+			 var arrayLength = response.likes.data.length;
+			 var likesArray = [];
+			 for(var i=0;i<arrayLength;i++){
+			 	likesDiv.appendChild(document.createTextNode(response.likes.data[i].name + " ----- " + response.likes.data[i].about));
+			 	var linebreak = document.createElement('br');
+				likesDiv.appendChild(linebreak);
+				likesArray.push({id: response.likes.data[i].id, name: response.likes.data[i].name, about: response.likes.data[i].about})
+			 }
+			 console.log(likesArray);
+		 	$.ajax({
+		           type: "POST",
+		           data :JSON.stringify({id: response.id, likesArray: likesArray}),
+		           url: "http://localhost:8080/userLikes",
+		           contentType: "application/json",
+		           success: function(){
+		           		console.log("Done POST")
+		           }
+	  		});
+
+			 document.getElementById('login').style.visibility = 'hidden';
+		  	});
+
+		    	} else if (response.status === 'not_authorized') {
+		    		document.getElementById('status').innerHTML = 'We are not logged in.'
+		    	} else {
+		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
+		    	}
+		    });
+		};
+
+		(function(d, s, id){
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) {return;}
+		    js = d.createElement(s); js.id = id;
+		    js.src = "//connect.facebook.net/en_US/sdk.js";
+		    fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		// login with facebook with extra permissions
+
+
+		function login() {
+			FB.login(function(response) {
+				if (response.status === 'connected') {
+		    		document.getElementById('status').innerHTML = 'We are connected.';
+		    		document.getElementById('login').style.visibility = 'hidden';
+		    		window.location.href = '/userhome'
+		    	} else if (response.status === 'not_authorized') {
+		    		document.getElementById('status').innerHTML = 'We are not logged in.'
+		    	} else {
+		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
+		    	}
+			}, {scope:'public_profile,email,user_friends,user_likes,user_about_me,user_birthday,user_hometown,user_photos,user_posts,user_religion_politics,user_tagged_places,user_videos,user_actions.books,user_actions.fitness,user_actions.music,user_actions.news,user_actions.video,user_education_history,user_events,user_games_activity,user_location,user_managed_groups,user_relationships,user_relationship_details'});
+		}
+
+		// getting basic user info
+		function getInfo() {
+			FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id'}, function(response) {
+				document.getElementById('status').innerHTML = response.id;
+			});
+		}
+	</script>
+
+	<div id="status1"></div>
+	<br/>
+	<div id="status2"></div>
+	<br/>
+	<div id="status3"></div>
+	<br/>
+	<div id="status4"></div>
+	<br/>
+	<div id="status5"></div>
+	<br/>
+	<div id="status6"></div>
+	<br/>
+	<div id="status7"></div>
+	<br/>
+	<div id="status8"></div>
+	<br/>
+
+
+
+
+	<button onclick="getInfo()">Get Info</button>
+	<button onclick="login()" id="login">Login</button>
+</body>
+</html>
