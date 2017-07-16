@@ -1,0 +1,19 @@
+{
+  "name": "testbubble",
+  "version": "1.0.0",
+  "description": "Filter Bubble",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Rai",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "json2csv": "^3.7.3",
+    "mongojs": "^2.4.0",
+    "os": "^0.1.1"
+  }
+}
