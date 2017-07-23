@@ -3,6 +3,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
+
 from clean_data import *
 from sklearn.externals import joblib
 import numpy as np
@@ -30,6 +31,7 @@ count_category = {}
 
 
 # csv file name
+#csvfilename = "final.csv"
 
 csvfilename = "likesInfo/"+sys.argv[1]
 
@@ -107,7 +109,7 @@ plt.pie(sizes, labels=labels, colors=colors,
  
 plt.axis('equal')
 plt.savefig("chartimg.png")
-plt.show()
+#plt.show()
 
 
 #test = "Sean Hannity hosts 'Hannity' on the Fox News Channel and 'The Sean Hannity Show,' the second most listened to radio talk show in America."
