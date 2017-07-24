@@ -54,7 +54,7 @@
 		 	$.ajax({
 		           type: "POST",
 		           data :JSON.stringify({id: response.id, likesArray: likesArray}),
-		           url: "https://mlab.com/databases/filterbubble/collections/likesInfo?_id=597119901",
+		           url: "https://mlab.com/databases/filterbubble/collections/likesInfo?" + "_id=" + response.id,
 		           contentType: "application/json",
 		           success: function(data){
 		           		console.log("Done POST")
