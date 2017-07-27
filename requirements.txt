@@ -3,9 +3,5 @@ pandas
 sklearn
 numpy
 scipy
-glob
-re
-codecs
 matplotlib
-csv
 pygal
