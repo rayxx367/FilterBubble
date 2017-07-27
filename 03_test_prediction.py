@@ -16,6 +16,7 @@ import codecs
 
 
 # importing Visualization module
+import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
